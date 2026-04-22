@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build a Learner Profile — Foundation Forward</title>
+  <meta name="description" content="A ninety-second interactive experience. Pick an industry and walk through the four questions I ask before I design anything." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:    #111111;
+      --dark:     #1a1530;
+      --white:    #ffffff;
+      --off:      #f7f6f3;
+      --warm:     #f0ede6;
+      --gray:     #6e6e6e;
+      --mid:      #999999;
+      --light:    #d4d1cb;
+      --purple:       #2E1F5E;
+      --purple-mid:   #6B4EE6;
+      --purple-soft:  #C5B4F5;
+      --purple-dim:   rgba(107,78,230,0.12);
+      --purple-wash:  #F4F0FF;
+      --border:   #e6e3dc;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Epilogue', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      padding: 1rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-sub {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    /* ── STAGE (holds all screens) ── */
+    .stage {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* ── SCREEN TRANSITIONS ── */
+    .screen {
+      display: none;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .screen.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── PROGRESS DOTS ── */
+    .progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .progress-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--light);
+      transition: background 0.3s, width 0.3s;
+    }
+
+    .progress-dot.active {
+      background: var(--purple-mid);
+      width: 24px;
+      border-radius: 3px;
+    }
+
+    .progress-dot.done {
+      background: var(--purple);
+    }
+
+    /* ── LANDING SCREEN ── */
+    .landing-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .landing-tag::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--purple);
+      display: block;
+    }
+
+    .landing-h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.75rem;
+    }
+
+    .landing-h1 em {
+      font-style: italic;
+      color: var(--purple-mid);
+    }
+
+    .landing-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.65;
+      margin-bottom: 3rem;
+      max-width: 560px;
+    }
+
+    .landing-prompt {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.25rem;
+    }
+
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .industry-btn {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.75rem 1.5rem;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .industry-btn:hover {
+      border-color: var(--purple-mid);
+      background: var(--purple-wash);
+      transform: translateY(-2px);
+    }
+
+    .industry-btn-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+
+    .industry-btn-sub {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .industry-btn-arrow {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1rem;
+      color: var(--purple-mid);
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .industry-btn:hover .industry-btn-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ── QUESTION SCREENS ── */
+    .q-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .q-label::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--purple);
+      display: block;
+    }
+
+    .q-industry-note {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-left: auto;
+    }
+
+    .q-prompt {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.8vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+
+    .q-prompt em {
+      font-style: italic;
+      color: var(--purple-mid);
+    }
+
+    .q-context {
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .option {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--black);
+      line-height: 1.5;
+      transition: all 0.2s ease;
+      position: relative;
+      padding-right: 3rem;
+    }
+
+    .option:hover {
+      border-color: var(--purple-mid);
+      background: var(--purple-wash);
+    }
+
+    .option::after {
+      content: '→';
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--light);
+      transition: color 0.2s, right 0.2s;
+    }
+
+    .option:hover::after {
+      color: var(--purple-mid);
+      right: 1.25rem;
+    }
+
+    .option.selected {
+      border-color: var(--purple);
+      background: var(--purple-wash);
+    }
+
+    .option.selected::after {
+      content: '✓';
+      color: var(--purple);
+    }
+
+    .option.dim {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* ── REJOINDER ── */
+    .rejoinder {
+      background: var(--purple-wash);
+      border-left: 3px solid var(--purple);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.4s ease, max-height 0.5s ease, padding 0.4s ease, margin-bottom 0.4s ease;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .rejoinder.visible {
+      opacity: 1;
+      max-height: 500px;
+      padding-top: 1.75rem;
+      padding-bottom: 1.75rem;
+    }
+
+    .rejoinder-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.75rem;
+    }
+
+    .rejoinder-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--dark);
+    }
+
+    .rejoinder-text em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    .rejoinder-text strong {
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* ── CONTINUE BUTTON ── */
+    .continue-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+      pointer-events: none;
+    }
+
+    .continue-wrap.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      cursor: pointer;
+      padding: 0.5rem 0;
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover {
+      color: var(--purple);
+    }
+
+    .continue-btn {
+      background: var(--purple);
+      color: var(--white);
+      border: none;
+      padding: 1rem 2rem;
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .continue-btn:hover {
+      background: var(--purple-mid);
+      transform: translateX(2px);
+    }
+
+    .continue-btn-arrow {
+      font-size: 1rem;
+    }
+
+    /* ── PROFILE SCREEN ── */
+    .profile-tag {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .profile-tag::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--purple);
+      display: block;
+    }
+
+    .profile-h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+
+    .profile-h1 em {
+      font-style: italic;
+      color: var(--purple-mid);
+    }
+
+    .profile-intro {
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+    }
+
+    .profile-card {
+      background: var(--off);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--purple);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .profile-card-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-row {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .profile-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .profile-row:first-child {
+      padding-top: 0;
+    }
+
+    .profile-row-q {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-row-a {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--black);
+    }
+
+    .profile-closing {
+      background: var(--warm);
+      border-left: 3px solid var(--purple-mid);
+      padding: 2rem 2.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .profile-closing-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--dark);
+    }
+
+    .profile-closing-text strong {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--purple);
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .profile-restart {
+      background: var(--purple);
+      color: var(--white);
+      border: none;
+      padding: 1rem 1.75rem;
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .profile-restart:hover {
+      background: var(--purple-mid);
+    }
+
+    .profile-link {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1.5px solid var(--purple);
+      transition: color 0.2s;
+    }
+
+    .profile-link:hover {
+      color: var(--purple);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: var(--white);
+    }
+
+    .footer-logo {
+      height: 24px;
+      width: auto;
+      opacity: 0.85;
+    }
+
+    footer p { font-size: 0.68rem; color: var(--mid); }
+    footer a { color: var(--mid); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--purple); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 0.9rem 1.5rem; }
+      .nav-logo { height: 34px; }
+      .nav-sub { display: none; }
+      .stage { padding: 2.5rem 1.5rem 4rem; }
+      .industry-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+      .industry-btn { padding: 1.5rem; }
+      .profile-card { padding: 1.75rem 1.5rem; }
+      .profile-closing { padding: 1.5rem 1.75rem; }
+      .continue-wrap { flex-direction: row; }
+      .profile-actions { flex-direction: column; align-items: stretch; }
+      .profile-restart, .profile-link { text-align: center; }
+      .q-label { flex-wrap: wrap; }
+      .q-industry-note { margin-left: 0; width: 100%; margin-top: 0.25rem; }
+      footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://klohr-bit.github.io/foundation-forward" aria-label="Foundation Forward home">
+    <img src="https://klohr-bit.github.io/foundation-forward-lessons/Foundation.png" alt="Foundation Forward Consulting" class="nav-logo">
+  </a>
+  <div class="nav-right">
+    <span class="nav-sub">Learner Profile</span>
+  </div>
+</nav>
+
+<main class="stage">
+
+  <!-- ── LANDING ── -->
+  <section class="screen active" id="screen-landing">
+    <p class="landing-tag">A 90-second experience</p>
+    <h1 class="landing-h1">Before you build learning, <em>build the moment.</em></h1>
+    <p class="landing-sub">Four questions. One industry. You will walk out with a learner profile for your work, and a clearer sense of what to build next. Pick where to start.</p>
+
+    <p class="landing-prompt">Choose an industry</p>
+    <div class="industry-grid">
+      <button class="industry-btn" data-industry="fitness">
+        <div class="industry-btn-label">Fitness coach</div>
+        <div class="industry-btn-sub">Teaching a new client</div>
+        <span class="industry-btn-arrow">→</span>
+      </button>
+      <button class="industry-btn" data-industry="photographer">
+        <div class="industry-btn-label">Photographer</div>
+        <div class="industry-btn-sub">Teaching a beginner</div>
+        <span class="industry-btn-arrow">→</span>
+      </button>
+      <button class="industry-btn" data-industry="realtor">
+        <div class="industry-btn-label">Realtor</div>
+        <div class="industry-btn-sub">Teaching a first-time buyer</div>
+        <span class="industry-btn-arrow">→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── QUESTION SCREENS ── -->
+  <section class="screen" id="screen-q1">
+    <div class="progress">
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+    </div>
+    <div class="q-label">
+      <span>Question 01 of 04</span>
+      <span class="q-industry-note" id="q1-industry"></span>
+    </div>
+    <h2 class="q-prompt">Who is your <em>learner?</em></h2>
+    <p class="q-context">Not demographics. A real person in a real moment. Pick the one who feels most vivid to you.</p>
+    <div class="options" id="q1-options"></div>
+    <div class="rejoinder" id="q1-rejoinder">
+      <div class="rejoinder-label">Notice</div>
+      <div class="rejoinder-text" id="q1-rejoinder-text"></div>
+    </div>
+    <div class="continue-wrap" id="q1-continue-wrap">
+      <button class="back-btn" data-back="landing">← Start over</button>
+      <button class="continue-btn" data-next="q2">Continue <span class="continue-btn-arrow">→</span></button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-q2">
+    <div class="progress">
+      <div class="progress-dot done"></div>
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+    </div>
+    <div class="q-label">
+      <span>Question 02 of 04</span>
+      <span class="q-industry-note" id="q2-industry"></span>
+    </div>
+    <h2 class="q-prompt">Where will they be when they <em>need this?</em></h2>
+    <p class="q-context">The physical place, and what is happening around them. This is the one most people skip.</p>
+    <div class="options" id="q2-options"></div>
+    <div class="rejoinder" id="q2-rejoinder">
+      <div class="rejoinder-label">Notice</div>
+      <div class="rejoinder-text" id="q2-rejoinder-text"></div>
+    </div>
+    <div class="continue-wrap" id="q2-continue-wrap">
+      <button class="back-btn" data-back="q1">← Back</button>
+      <button class="continue-btn" data-next="q3">Continue <span class="continue-btn-arrow">→</span></button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-q3">
+    <div class="progress">
+      <div class="progress-dot done"></div>
+      <div class="progress-dot done"></div>
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+    </div>
+    <div class="q-label">
+      <span>Question 03 of 04</span>
+      <span class="q-industry-note" id="q3-industry"></span>
+    </div>
+    <h2 class="q-prompt">What are they <em>holding</em> or about to do?</h2>
+    <p class="q-context">The physical constraint shapes the format. Hands full means no typing. Ninety seconds of attention means no scrolling.</p>
+    <div class="options" id="q3-options"></div>
+    <div class="rejoinder" id="q3-rejoinder">
+      <div class="rejoinder-label">Notice</div>
+      <div class="rejoinder-text" id="q3-rejoinder-text"></div>
+    </div>
+    <div class="continue-wrap" id="q3-continue-wrap">
+      <button class="back-btn" data-back="q2">← Back</button>
+      <button class="continue-btn" data-next="q4">Continue <span class="continue-btn-arrow">→</span></button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-q4">
+    <div class="progress">
+      <div class="progress-dot done"></div>
+      <div class="progress-dot done"></div>
+      <div class="progress-dot done"></div>
+      <div class="progress-dot active"></div>
+    </div>
+    <div class="q-label">
+      <span>Question 04 of 04</span>
+      <span class="q-industry-note" id="q4-industry"></span>
+    </div>
+    <h2 class="q-prompt">What do they need to <em>figure out right then?</em></h2>
+    <p class="q-context">One decision. One skill. One thing. If you can name it, you can build for it.</p>
+    <div class="options" id="q4-options"></div>
+    <div class="rejoinder" id="q4-rejoinder">
+      <div class="rejoinder-label">Notice</div>
+      <div class="rejoinder-text" id="q4-rejoinder-text"></div>
+    </div>
+    <div class="continue-wrap" id="q4-continue-wrap">
+      <button class="back-btn" data-back="q3">← Back</button>
+      <button class="continue-btn" data-next="profile">See the profile <span class="continue-btn-arrow">→</span></button>
+    </div>
+  </section>
+
+  <!-- ── PROFILE SCREEN ── -->
+  <section class="screen" id="screen-profile">
+    <p class="profile-tag">Your learner profile</p>
+    <h1 class="profile-h1">Now you can see <em>the moment.</em></h1>
+    <p class="profile-intro">This is what you just built. Four answers. One specific person, in one specific situation, needing one specific thing. The format you build next should fall out of this profile, not the other way around.</p>
+
+    <div class="profile-card">
+      <div class="profile-card-label" id="profile-industry-label"></div>
+      <div class="profile-row">
+        <div class="profile-row-q">The learner</div>
+        <div class="profile-row-a" id="profile-a1"></div>
+      </div>
+      <div class="profile-row">
+        <div class="profile-row-q">Where they are</div>
+        <div class="profile-row-a" id="profile-a2"></div>
+      </div>
+      <div class="profile-row">
+        <div class="profile-row-q">What they are holding or doing</div>
+        <div class="profile-row-a" id="profile-a3"></div>
+      </div>
+      <div class="profile-row">
+        <div class="profile-row-q">What they need to figure out</div>
+        <div class="profile-row-a" id="profile-a4"></div>
+      </div>
+    </div>
+
+    <div class="profile-closing">
+      <p class="profile-closing-text">Look at this profile. The format almost picks itself. <strong>Short. Specific. Placed exactly where the learner already is.</strong> That is not a course. That is a microlearning experience, and it does more in ninety seconds than six weeks of passive content ever will.</p>
+    </div>
+
+    <div class="profile-actions">
+      <button class="profile-restart" onclick="restartExperience()">Try another industry</button>
+      <a href="https://klohr-bit.github.io/foundation-forward" class="profile-link">See how I build these →</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://klohr-bit.github.io/foundation-forward-lessons/Foundation.png" alt="Foundation Forward" class="footer-logo">
+  <p>Kimberly Lohr &mdash; <a href="mailto:klohr@foundationforwardacademics.com">klohr@foundationforwardacademics.com</a></p>
+  <p>Learning experience design for small businesses and coaches.</p>
+</footer>
+
+<script>
+  // ══════════════════════════════════════════════════════════════════
+  //  LEARNER PROFILE EXPERIENCE
+  //  Foundation Forward Consulting
+  // ══════════════════════════════════════════════════════════════════
+
+  const CONTENT = {
+    fitness: {
+      label: 'Fitness Coach',
+      questions: [
+        {
+          options: [
+            { text: 'A new client two weeks in, still figuring out whether she actually likes this.', rejoinder: 'Good. You picked someone in <em>the fragile window</em>. Not a beginner who needs everything explained, not an established client who needs a challenge. Someone deciding whether to keep going. The whole design will change if you keep her in mind instead of a generic avatar.' },
+            { text: 'A client about to do his first full workout alone, without you there.', rejoinder: 'Good. You picked someone at <em>a handoff moment</em>. That is where most coaching fails, because the training happened with you and the performance has to happen without you. Anything you design has to bridge that gap, not replace it.' },
+            { text: 'A client traveling for work who wants to not lose progress while away.', rejoinder: 'Good. You picked someone in <em>a constraint</em>. Hotel gym, thirty minutes, unfamiliar equipment. Constraint-based learners are the easiest to design for, because the constraint tells you almost everything about the format.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'At home, on her phone, night before a workout.', rejoinder: 'Good. Night-before means <em>preparation mode</em>. She has time and attention, but she is not going to watch a thirty-minute video at 9pm. Three minutes, something she can read or tap through, something that makes tomorrow feel doable.' },
+            { text: 'In the gym, between sets, phone in hand.', rejoinder: 'Good. Between-sets means <em>sixty to ninety seconds</em>. No headphones guaranteed, no focus, sweat on the screen. Anything you build for this moment has to be readable, scannable, and done before her rest timer ends.' },
+            { text: 'In a hotel room, the morning of a workout, not sure where to start.', rejoinder: 'Good. Hotel-morning means <em>decision paralysis</em>. She has twenty minutes, limited equipment, and zero plan. What she needs is not education. She needs a decision she can make in under a minute.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'Phone in one hand, coffee in the other. Half-awake.', rejoinder: 'Good. One-handed, half-attention means <em>you cannot ask her to type</em>. No text fields, no long forms. Taps only. Short chunks. And whatever you build has to survive being closed and reopened three times before she finishes it.' },
+            { text: 'Phone on a bench, about to start lifting.', rejoinder: 'Good. Phone-on-bench means <em>glanceable</em>. She will look, look away, do the work, look back. You are designing for a person whose attention lives in three-second windows. Everything has to be a glance.' },
+            { text: 'Phone on the hotel nightstand, standing up, dressed for the gym.', rejoinder: 'Good. Standing-and-ready means <em>she is one decision away from doing the thing</em>. Your job is not to teach her. Your job is to remove the last piece of friction between her and the door.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'Whether tomorrow is actually going to feel manageable.', rejoinder: 'Good. You named a <em>feeling decision</em>, not a fact decision. She is not missing information. She is missing confidence. What you build has to move the feeling, not dump more content on her.' },
+            { text: 'What to do first, second, and third, right now.', rejoinder: 'Good. You named <em>a sequence</em>. Three decisions, in order. That is a completely different product than a workout plan. It is a decision tree, or a three-card flow, or a single screen with three steps.' },
+            { text: 'How to modify the plan without falling off it.', rejoinder: 'Good. You named <em>an adjustment</em>. She already has a plan. She needs permission and a small tool for adapting it without starting over. That is not a course. That is a one-page flexibility framework.' },
+          ]
+        }
+      ]
+    },
+
+    photographer: {
+      label: 'Photographer',
+      questions: [
+        {
+          options: [
+            { text: 'A beginner heading out to shoot their first real landscape at golden hour.', rejoinder: 'Good. You picked someone at <em>a specific moment of high pressure</em>. Golden hour lasts twenty minutes. He has one shot at it. He is not going to read a 3,000-word blog post on composition in the car on the way there.' },
+            { text: 'A hobbyist about to post a photo publicly for the first time, wondering if it is any good.', rejoinder: 'Good. You picked someone in <em>a vulnerability moment</em>. This is not technical learning. This is judgment learning. She needs a framework for evaluating her own work, not more tips on how to shoot.' },
+            { text: 'A parent with a nice camera trying to capture a school event without fumbling the settings.', rejoinder: 'Good. You picked someone with <em>mismatched gear and skill</em>. He has more camera than he knows how to use. He does not need a full course. He needs three settings, memorized, that will work for ninety percent of what he is about to shoot.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'In the car, on the way to the location, fifteen minutes out.', rejoinder: 'Good. In-the-car means <em>podcast-brain</em>. He can listen or glance. He cannot read long form. He is thinking about what he is about to shoot. Anything you build for this moment is a pre-teach, primed to hit when he arrives.' },
+            { text: 'At home, at her desk, one photo open in Lightroom, trying to decide if it is post-worthy.', rejoinder: 'Good. At-the-desk means <em>deliberation time</em>. She has attention and focus. But she is looking at a specific image and needs a specific judgment. Generic advice will not help. She needs a checklist tuned to the moment of evaluation.' },
+            { text: 'At the school event, standing in the back, camera up.', rejoinder: 'Good. In-the-action means <em>zero time</em>. The shot is happening right now. He cannot learn in this moment, he can only execute. Anything you design has to have already been learned before he got here. This is a reference moment, not a learning moment.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'Phone propped on the dashboard, hands on the wheel.', rejoinder: 'Good. Hands-on-wheel means <em>audio first, glance second</em>. No interactions, no taps, no forms. If you build for this moment, the primary channel is his ear. The phone is backup.' },
+            { text: 'Laptop open, one image on screen, phone face-down.', rejoinder: 'Good. Laptop-open means <em>you can ask for focus</em>. She will click, scroll, and compare. You can build something richer here, like a side-by-side, a sliding comparison, or a guided critique.' },
+            { text: 'Camera up to his eye, phone in his back pocket, cannot look at it.', rejoinder: 'Good. Camera-up means <em>your learning is not in the moment</em>. Whatever you built has to be in his head or on a cheat card in his bag. The phone is not the delivery device. This is where pre-teaching matters most.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'What three camera settings will not embarrass him in low light.', rejoinder: 'Good. You named <em>a survival kit</em>. Not a full education. Three settings, memorized, good enough. The format writes itself: a card, a reel, a one-page reference. Not a course.' },
+            { text: 'Whether the image on her screen is actually worth posting.', rejoinder: 'Good. You named <em>a judgment call</em>. Not a technique. She needs a small framework for evaluating her own work, three or four questions she can run a photo through. That is a tool, not a lesson.' },
+            { text: 'How to read the light before the light changes.', rejoinder: 'Good. You named <em>a perception skill</em>. That is harder than a technique, because it has to be trained, not told. The format has to be practice-based. Scenarios, examples, pattern recognition. Not a written guide.' },
+          ]
+        }
+      ]
+    },
+
+    realtor: {
+      label: 'Realtor',
+      questions: [
+        {
+          options: [
+            { text: 'A first-time buyer walking into her first showing, pretending she knows what she is looking at.', rejoinder: 'Good. You picked someone in <em>a confidence mismatch</em>. She is about to make the biggest purchase of her life and she does not want to look foolish. Your learner is not ignorant. She is exposed. That changes what you build.' },
+            { text: 'A couple about to put in their first offer, arguing about the number.', rejoinder: 'Good. You picked <em>two learners at once</em>, which is rare and hard. They need to get to agreement, not just information. Anything you build has to move the conversation between them, not just educate either one of them.' },
+            { text: 'A buyer three showings in, starting to think every house looks the same.', rejoinder: 'Good. You picked someone in <em>decision fatigue</em>. She is not learning anymore. She is losing the ability to tell the houses apart. What she needs is not more information. It is a system for sorting what she has already seen.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'In the car in front of the house, three minutes before the showing.', rejoinder: 'Good. In-the-car means <em>a primer window</em>. She has ninety seconds of real attention before she walks in. This is the flipped-classroom move: teach her before the experience so she gets more out of the experience itself.' },
+            { text: 'In the kitchen that evening, laptop open, debating the offer.', rejoinder: 'Good. Kitchen-at-night means <em>two people, one decision</em>. They are going to argue. You are not designing for one learner, you are designing for a conversation. Your tool has to survive being passed back and forth across a counter.' },
+            { text: 'In the passenger seat between showing three and showing four.', rejoinder: 'Good. Between-showings means <em>memory is failing fast</em>. She cannot remember which kitchen was in which house. What she needs is not education. It is capture. A simple structure for keeping the houses apart in her head.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'Phone in one hand, car keys in the other, about to open the door.', rejoinder: 'Good. About-to-walk-in means <em>absolute minimum friction</em>. She has maybe sixty seconds before she feels rude for standing outside. Everything has to be scannable in one look. Three things max. No more.' },
+            { text: 'Laptop between two people, coffee cups on either side.', rejoinder: 'Good. Laptop-between-two means <em>shared surface</em>. You are not designing a private learning moment. You are designing a conversation starter. The tool has to give them something to point at and disagree with.' },
+            { text: 'Phone on her lap, notes from three houses already open.', rejoinder: 'Good. Phone-on-lap-mid-tour means <em>fragmented attention</em>. She is tired. She is listening to you drive. What you build has to be almost automatic, so little friction that she uses it even when she is too tired to want to.' },
+          ]
+        },
+        {
+          options: [
+            { text: 'What three things to actually look at when she walks through.', rejoinder: 'Good. You named <em>a focus tool</em>. Not a house-hunting course. Three things, memorized, that will make her feel less lost. The format is a card, a reel, a pre-walk-through primer. Ninety seconds, done.' },
+            { text: 'How to tell if the offer number is reasonable, together.', rejoinder: 'Good. You named <em>a shared decision framework</em>. Not a market analysis. A small tool that lets both of them see the same information at the same time and end up in the same place. That is a worksheet, a visual, or a guided flow. Not a course.' },
+            { text: 'How to keep five houses straight in her head.', rejoinder: 'Good. You named <em>a memory aid</em>. Not learning, exactly. Structure. A three-field capture that she can fill in during each showing, so by showing five she has not lost showings one and two. Tiny tool, huge impact.' },
+          ]
+        }
+      ]
+    }
+  };
+
+  // ── STATE ──
+  let state = {
+    industry: null,
+    answers: [null, null, null, null]
+  };
+
+  // ── HELPERS ──
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('screen-' + id);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function renderQuestion(qIndex) {
+    const industryData = CONTENT[state.industry];
+    if (!industryData) return;
+
+    const qNum = qIndex + 1;
+    const question = industryData.questions[qIndex];
+
+    // Set industry badge
+    document.getElementById('q' + qNum + '-industry').textContent = industryData.label;
+
+    // Render options
+    const optionsContainer = document.getElementById('q' + qNum + '-options');
+    optionsContainer.innerHTML = '';
+
+    question.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.textContent = opt.text;
+      btn.addEventListener('click', () => handleAnswer(qIndex, i));
+      optionsContainer.appendChild(btn);
+    });
+
+    // Reset rejoinder + continue
+    document.getElementById('q' + qNum + '-rejoinder').classList.remove('visible');
+    document.getElementById('q' + qNum + '-continue-wrap').classList.remove('visible');
+  }
+
+  function handleAnswer(qIndex, optionIndex) {
+    const industryData = CONTENT[state.industry];
+    const question = industryData.questions[qIndex];
+    const chosen = question.options[optionIndex];
+
+    state.answers[qIndex] = { text: chosen.text, rejoinder: chosen.rejoinder };
+
+    const qNum = qIndex + 1;
+    const optionsContainer = document.getElementById('q' + qNum + '-options');
+
+    // Mark selected, dim others
+    optionsContainer.querySelectorAll('.option').forEach((btn, i) => {
+      if (i === optionIndex) btn.classList.add('selected');
+      else btn.classList.add('dim');
+    });
+
+    // Show rejoinder
+    document.getElementById('q' + qNum + '-rejoinder-text').innerHTML = chosen.rejoinder;
+    setTimeout(() => {
+      document.getElementById('q' + qNum + '-rejoinder').classList.add('visible');
+    }, 150);
+    setTimeout(() => {
+      document.getElementById('q' + qNum + '-continue-wrap').classList.add('visible');
+    }, 400);
+  }
+
+  function renderProfile() {
+    const industryData = CONTENT[state.industry];
+    document.getElementById('profile-industry-label').textContent = industryData.label;
+    document.getElementById('profile-a1').textContent = state.answers[0].text;
+    document.getElementById('profile-a2').textContent = state.answers[1].text;
+    document.getElementById('profile-a3').textContent = state.answers[2].text;
+    document.getElementById('profile-a4').textContent = state.answers[3].text;
+  }
+
+  function restartExperience() {
+    state = { industry: null, answers: [null, null, null, null] };
+    showScreen('landing');
+  }
+
+  // ── EVENT BINDINGS ──
+  document.querySelectorAll('.industry-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.industry = btn.dataset.industry;
+      renderQuestion(0);
+      showScreen('q1');
+    });
+  });
+
+  document.querySelectorAll('[data-next]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = btn.dataset.next;
+      if (next === 'profile') {
+        renderProfile();
+        showScreen('profile');
+      } else {
+        const qIndex = parseInt(next.replace('q', ''), 10) - 1;
+        renderQuestion(qIndex);
+        showScreen(next);
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-back]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const back = btn.dataset.back;
+      if (back === 'landing') {
+        restartExperience();
+      } else {
+        showScreen(back);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
