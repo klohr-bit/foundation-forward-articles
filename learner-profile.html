@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build a Learner Profile — Foundation Forward</title>
-  <meta name="description" content="A ninety-second interactive experience. Pick an industry and walk through the four questions I ask before I design anything." />
+  <title>What You Could Build — Foundation Forward</title>
+  <meta name="description" content="A ninety-second experience. You have the expertise. Let's find the small, useful thing you could build with it." />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -49,17 +49,9 @@
       backdrop-filter: blur(10px);
     }
 
-    .nav-logo {
-      height: 42px;
-      width: auto;
-      display: block;
-    }
+    .nav-logo { height: 42px; width: auto; display: block; }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-    }
+    .nav-right { display: flex; align-items: center; gap: 2.5rem; }
 
     .nav-sub {
       font-size: 0.65rem;
@@ -69,7 +61,7 @@
       color: var(--light);
     }
 
-    /* ── STAGE (holds all screens) ── */
+    /* ── STAGE ── */
     .stage {
       max-width: 760px;
       margin: 0 auto;
@@ -117,11 +109,9 @@
       border-radius: 3px;
     }
 
-    .progress-dot.done {
-      background: var(--purple);
-    }
+    .progress-dot.done { background: var(--purple); }
 
-    /* ── LANDING SCREEN ── */
+    /* ── LANDING ── */
     .landing-tag {
       font-size: 0.65rem;
       font-weight: 500;
@@ -356,7 +346,7 @@
 
     .rejoinder.visible {
       opacity: 1;
-      max-height: 500px;
+      max-height: 600px;
       padding-top: 1.75rem;
       padding-bottom: 1.75rem;
     }
@@ -419,9 +409,7 @@
       transition: color 0.2s;
     }
 
-    .back-btn:hover {
-      color: var(--purple);
-    }
+    .back-btn:hover { color: var(--purple); }
 
     .continue-btn {
       background: var(--purple);
@@ -445,12 +433,10 @@
       transform: translateX(2px);
     }
 
-    .continue-btn-arrow {
-      font-size: 1rem;
-    }
+    .continue-btn-arrow { font-size: 1rem; }
 
-    /* ── PROFILE SCREEN ── */
-    .profile-tag {
+    /* ── RECOMMENDATION SCREEN ── */
+    .rec-tag {
       font-size: 0.62rem;
       font-weight: 600;
       letter-spacing: 0.2em;
@@ -462,7 +448,7 @@
       gap: 0.75rem;
     }
 
-    .profile-tag::before {
+    .rec-tag::before {
       content: '';
       width: 28px;
       height: 1px;
@@ -470,7 +456,7 @@
       display: block;
     }
 
-    .profile-h1 {
+    .rec-h1 {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(1.9rem, 4vw, 2.6rem);
       font-weight: 600;
@@ -480,12 +466,12 @@
       margin-bottom: 1rem;
     }
 
-    .profile-h1 em {
+    .rec-h1 em {
       font-style: italic;
       color: var(--purple-mid);
     }
 
-    .profile-intro {
+    .rec-intro {
       font-size: 0.95rem;
       color: var(--gray);
       line-height: 1.65;
@@ -493,62 +479,78 @@
       max-width: 560px;
     }
 
-    .profile-card {
+    .rec-card {
       background: var(--off);
       border: 1px solid var(--border);
       border-top: 3px solid var(--purple);
       padding: 2.5rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
-    .profile-card-label {
+    .rec-card-label {
       font-size: 0.6rem;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--mid);
+      margin-bottom: 1.25rem;
+    }
+
+    .rec-format {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--black);
+      letter-spacing: -0.01em;
       margin-bottom: 1.5rem;
     }
 
-    .profile-row {
-      padding: 1.25rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .profile-row:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .profile-row:first-child {
-      padding-top: 0;
-    }
-
-    .profile-row-q {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .rec-format em {
+      font-style: italic;
       color: var(--purple);
-      margin-bottom: 0.5rem;
     }
 
-    .profile-row-a {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      line-height: 1.5;
+    .rec-description {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .rec-description strong {
+      font-weight: 600;
       color: var(--black);
     }
 
-    .profile-closing {
+    .rec-why {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .rec-why-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.75rem;
+    }
+
+    .rec-why-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--dark);
+    }
+
+    .rec-closing {
       background: var(--warm);
       border-left: 3px solid var(--purple-mid);
       padding: 2rem 2.25rem;
       margin-bottom: 2.5rem;
     }
 
-    .profile-closing-text {
+    .rec-closing-text {
       font-family: 'Playfair Display', serif;
       font-size: 1.15rem;
       font-style: italic;
@@ -556,20 +558,20 @@
       color: var(--dark);
     }
 
-    .profile-closing-text strong {
+    .rec-closing-text strong {
       font-style: normal;
       font-weight: 600;
       color: var(--purple);
     }
 
-    .profile-actions {
+    .rec-actions {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       align-items: center;
     }
 
-    .profile-restart {
+    .rec-restart {
       background: var(--purple);
       color: var(--white);
       border: none;
@@ -583,11 +585,9 @@
       transition: background 0.2s;
     }
 
-    .profile-restart:hover {
-      background: var(--purple-mid);
-    }
+    .rec-restart:hover { background: var(--purple-mid); }
 
-    .profile-link {
+    .rec-link {
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.15em;
@@ -599,9 +599,7 @@
       transition: color 0.2s;
     }
 
-    .profile-link:hover {
-      color: var(--purple);
-    }
+    .rec-link:hover { color: var(--purple); }
 
     /* ── FOOTER ── */
     footer {
@@ -615,11 +613,7 @@
       background: var(--white);
     }
 
-    .footer-logo {
-      height: 24px;
-      width: auto;
-      opacity: 0.85;
-    }
+    .footer-logo { height: 24px; width: auto; opacity: 0.85; }
 
     footer p { font-size: 0.68rem; color: var(--mid); }
     footer a { color: var(--mid); text-decoration: none; transition: color 0.15s; }
@@ -633,11 +627,11 @@
       .stage { padding: 2.5rem 1.5rem 4rem; }
       .industry-grid { grid-template-columns: 1fr; gap: 0.75rem; }
       .industry-btn { padding: 1.5rem; }
-      .profile-card { padding: 1.75rem 1.5rem; }
-      .profile-closing { padding: 1.5rem 1.75rem; }
+      .rec-card { padding: 1.75rem 1.5rem; }
+      .rec-closing { padding: 1.5rem 1.75rem; }
       .continue-wrap { flex-direction: row; }
-      .profile-actions { flex-direction: column; align-items: stretch; }
-      .profile-restart, .profile-link { text-align: center; }
+      .rec-actions { flex-direction: column; align-items: stretch; }
+      .rec-restart, .rec-link { text-align: center; }
       .q-label { flex-wrap: wrap; }
       .q-industry-note { margin-left: 0; width: 100%; margin-top: 0.25rem; }
       footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
@@ -648,11 +642,11 @@
 
 <!-- NAV -->
 <nav>
-  <a href="https://klohr-bit.github.io/foundation-forward" aria-label="Foundation Forward home">
+  <a href="https://klohr-bit.github.io/foundation-forward-lessons/" aria-label="Foundation Forward home">
     <img src="https://klohr-bit.github.io/foundation-forward-lessons/Foundation.png" alt="Foundation Forward Consulting" class="nav-logo">
   </a>
   <div class="nav-right">
-    <span class="nav-sub">Learner Profile</span>
+    <span class="nav-sub">What You Could Build</span>
   </div>
 </nav>
 
@@ -661,24 +655,24 @@
   <!-- ── LANDING ── -->
   <section class="screen active" id="screen-landing">
     <p class="landing-tag">A 90-second experience</p>
-    <h1 class="landing-h1">Before you build learning, <em>build the moment.</em></h1>
-    <p class="landing-sub">Four questions. One industry. You will walk out with a learner profile for your work, and a clearer sense of what to build next. Pick where to start.</p>
+    <h1 class="landing-h1">You have the expertise. <em>Let's find what to build with it.</em></h1>
+    <p class="landing-sub">Four questions. By the end, you'll know exactly one small, useful thing you could build to share what you know. Not a course. Something better. Pick where to start.</p>
 
-    <p class="landing-prompt">Choose an industry</p>
+    <p class="landing-prompt">Choose your work</p>
     <div class="industry-grid">
       <button class="industry-btn" data-industry="fitness">
         <div class="industry-btn-label">Fitness coach</div>
-        <div class="industry-btn-sub">Teaching a new client</div>
+        <div class="industry-btn-sub">Training real clients</div>
         <span class="industry-btn-arrow">→</span>
       </button>
       <button class="industry-btn" data-industry="photographer">
         <div class="industry-btn-label">Photographer</div>
-        <div class="industry-btn-sub">Teaching a beginner</div>
+        <div class="industry-btn-sub">Teaching your craft</div>
         <span class="industry-btn-arrow">→</span>
       </button>
-      <button class="industry-btn" data-industry="realtor">
-        <div class="industry-btn-label">Realtor</div>
-        <div class="industry-btn-sub">Teaching a first-time buyer</div>
+      <button class="industry-btn" data-industry="service">
+        <div class="industry-btn-label">Service business</div>
+        <div class="industry-btn-sub">Running a small team</div>
         <span class="industry-btn-arrow">→</span>
       </button>
     </div>
@@ -696,11 +690,11 @@
       <span>Question 01 of 04</span>
       <span class="q-industry-note" id="q1-industry"></span>
     </div>
-    <h2 class="q-prompt">Who is your <em>learner?</em></h2>
-    <p class="q-context">Not demographics. A real person in a real moment. Pick the one who feels most vivid to you.</p>
+    <h2 class="q-prompt">What do you know that your people are <em>still figuring out?</em></h2>
+    <p class="q-context">Not your whole body of knowledge. The specific thing you've learned through experience that still trips them up. Pick the one that feels most vivid.</p>
     <div class="options" id="q1-options"></div>
     <div class="rejoinder" id="q1-rejoinder">
-      <div class="rejoinder-label">Notice</div>
+      <div class="rejoinder-label">Good</div>
       <div class="rejoinder-text" id="q1-rejoinder-text"></div>
     </div>
     <div class="continue-wrap" id="q1-continue-wrap">
@@ -720,11 +714,11 @@
       <span>Question 02 of 04</span>
       <span class="q-industry-note" id="q2-industry"></span>
     </div>
-    <h2 class="q-prompt">Where will they be when they <em>need this?</em></h2>
-    <p class="q-context">The physical place, and what is happening around them. This is the one most people skip.</p>
+    <h2 class="q-prompt">Where do you see them <em>get stuck?</em></h2>
+    <p class="q-context">Not every struggle. The one you keep watching. The moment where you think: someone should really teach them this.</p>
     <div class="options" id="q2-options"></div>
     <div class="rejoinder" id="q2-rejoinder">
-      <div class="rejoinder-label">Notice</div>
+      <div class="rejoinder-label">Good</div>
       <div class="rejoinder-text" id="q2-rejoinder-text"></div>
     </div>
     <div class="continue-wrap" id="q2-continue-wrap">
@@ -744,11 +738,11 @@
       <span>Question 03 of 04</span>
       <span class="q-industry-note" id="q3-industry"></span>
     </div>
-    <h2 class="q-prompt">What are they <em>holding</em> or about to do?</h2>
-    <p class="q-context">The physical constraint shapes the format. Hands full means no typing. Ninety seconds of attention means no scrolling.</p>
+    <h2 class="q-prompt">When does that <em>stuck moment</em> happen?</h2>
+    <p class="q-context">Picture the actual scene. Where are they. What are they doing. What's in their hand. This is the moment that decides what you should build.</p>
     <div class="options" id="q3-options"></div>
     <div class="rejoinder" id="q3-rejoinder">
-      <div class="rejoinder-label">Notice</div>
+      <div class="rejoinder-label">Good</div>
       <div class="rejoinder-text" id="q3-rejoinder-text"></div>
     </div>
     <div class="continue-wrap" id="q3-continue-wrap">
@@ -768,52 +762,42 @@
       <span>Question 04 of 04</span>
       <span class="q-industry-note" id="q4-industry"></span>
     </div>
-    <h2 class="q-prompt">What do they need to <em>figure out right then?</em></h2>
-    <p class="q-context">One decision. One skill. One thing. If you can name it, you can build for it.</p>
+    <h2 class="q-prompt">What do you wish they <em>understood right then?</em></h2>
+    <p class="q-context">One thing. Not the whole method. The single insight, or decision, or reminder that would change what happens next for them.</p>
     <div class="options" id="q4-options"></div>
     <div class="rejoinder" id="q4-rejoinder">
-      <div class="rejoinder-label">Notice</div>
+      <div class="rejoinder-label">Good</div>
       <div class="rejoinder-text" id="q4-rejoinder-text"></div>
     </div>
     <div class="continue-wrap" id="q4-continue-wrap">
       <button class="back-btn" data-back="q3">← Back</button>
-      <button class="continue-btn" data-next="profile">See the profile <span class="continue-btn-arrow">→</span></button>
+      <button class="continue-btn" data-next="recommendation">See what to build <span class="continue-btn-arrow">→</span></button>
     </div>
   </section>
 
-  <!-- ── PROFILE SCREEN ── -->
-  <section class="screen" id="screen-profile">
-    <p class="profile-tag">Your learner profile</p>
-    <h1 class="profile-h1">Now you can see <em>the moment.</em></h1>
-    <p class="profile-intro">This is what you just built. Four answers. One specific person, in one specific situation, needing one specific thing. The format you build next should fall out of this profile, not the other way around.</p>
+  <!-- ── RECOMMENDATION SCREEN ── -->
+  <section class="screen" id="screen-recommendation">
+    <p class="rec-tag">Here's what you could build</p>
+    <h1 class="rec-h1">A small thing. <em>Used at the right moment.</em></h1>
+    <p class="rec-intro">Based on what you told me, you don't need to build a course. You need to build this.</p>
 
-    <div class="profile-card">
-      <div class="profile-card-label" id="profile-industry-label"></div>
-      <div class="profile-row">
-        <div class="profile-row-q">The learner</div>
-        <div class="profile-row-a" id="profile-a1"></div>
-      </div>
-      <div class="profile-row">
-        <div class="profile-row-q">Where they are</div>
-        <div class="profile-row-a" id="profile-a2"></div>
-      </div>
-      <div class="profile-row">
-        <div class="profile-row-q">What they are holding or doing</div>
-        <div class="profile-row-a" id="profile-a3"></div>
-      </div>
-      <div class="profile-row">
-        <div class="profile-row-q">What they need to figure out</div>
-        <div class="profile-row-a" id="profile-a4"></div>
+    <div class="rec-card">
+      <div class="rec-card-label" id="rec-industry-label"></div>
+      <div class="rec-format" id="rec-format"></div>
+      <div class="rec-description" id="rec-description"></div>
+      <div class="rec-why">
+        <div class="rec-why-label">Why this fits</div>
+        <div class="rec-why-text" id="rec-why-text"></div>
       </div>
     </div>
 
-    <div class="profile-closing">
-      <p class="profile-closing-text">Look at this profile. The format almost picks itself. <strong>Short. Specific. Placed exactly where the learner already is.</strong> That is not a course. That is a microlearning experience, and it does more in ninety seconds than six weeks of passive content ever will.</p>
+    <div class="rec-closing">
+      <p class="rec-closing-text">You already know enough to build this. <strong>The question was never whether you had the expertise. It was where to put it.</strong></p>
     </div>
 
-    <div class="profile-actions">
-      <button class="profile-restart" onclick="restartExperience()">Try another industry</button>
-      <a href="https://klohr-bit.github.io/foundation-forward/contact.html" class="profile-link">Work with me →</a>
+    <div class="rec-actions">
+      <button class="rec-restart" onclick="restartExperience()">Try another one</button>
+      <a href="https://klohr-bit.github.io/foundation-forward-lessons/contact.html" class="rec-link">Work with me →</a>
     </div>
   </section>
 
@@ -828,8 +812,9 @@
 
 <script>
   // ══════════════════════════════════════════════════════════════════
-  //  LEARNER PROFILE EXPERIENCE
+  //  WHAT YOU COULD BUILD
   //  Foundation Forward Consulting
+  //  Expertise → Moment → Thing to build
   // ══════════════════════════════════════════════════════════════════
 
   const CONTENT = {
@@ -838,33 +823,42 @@
       questions: [
         {
           options: [
-            { text: 'A new client two weeks in, still figuring out whether she actually likes this.', rejoinder: 'Good. You picked someone in <em>the fragile window</em>. Not a beginner who needs everything explained, not an established client who needs a challenge. Someone deciding whether to keep going. The whole design will change if you keep her in mind instead of a generic avatar.' },
-            { text: 'A client about to do his first full workout alone, without you there.', rejoinder: 'Good. You picked someone at <em>a handoff moment</em>. That is where most coaching fails, because the training happened with you and the performance has to happen without you. Anything you design has to bridge that gap, not replace it.' },
-            { text: 'A client traveling for work who wants to not lose progress while away.', rejoinder: 'Good. You picked someone in <em>a constraint</em>. Hotel gym, thirty minutes, unfamiliar equipment. Constraint-based learners are the easiest to design for, because the constraint tells you almost everything about the format.' },
+            { text: 'How to modify a workout when something feels off, without scrapping the whole plan.', rejoinder: 'You picked <em>a judgment skill</em>. Something you do without thinking now, but your clients freeze on. That is exactly the kind of expertise that goes untaught, because it feels obvious to you.' },
+            { text: 'How to tell the difference between productive discomfort and actual pain.', rejoinder: 'You picked <em>a perception skill</em>. The kind of thing that takes years to develop and seconds to apply. These are hardest to teach with a course and easiest to teach with a small, well-placed tool.' },
+            { text: 'How to scale effort across a workout instead of burning out in the first set.', rejoinder: 'You picked <em>a pacing skill</em>. Something your clients get wrong on their own and get right with you in the room. That gap is your opening.' },
           ]
         },
         {
           options: [
-            { text: 'At home, on her phone, night before a workout.', rejoinder: 'Good. Night-before means <em>preparation mode</em>. She has time and attention, but she is not going to watch a thirty-minute video at 9pm. Three minutes, something she can read or tap through, something that makes tomorrow feel doable.' },
-            { text: 'In the gym, between sets, phone in hand.', rejoinder: 'Good. Between-sets means <em>sixty to ninety seconds</em>. No headphones guaranteed, no focus, sweat on the screen. Anything you build for this moment has to be readable, scannable, and done before her rest timer ends.' },
-            { text: 'In a hotel room, the morning of a workout, not sure where to start.', rejoinder: 'Good. Hotel-morning means <em>decision paralysis</em>. She has twenty minutes, limited equipment, and zero plan. What she needs is not education. She needs a decision she can make in under a minute.' },
+            { text: 'Halfway through a workout, when they are tired and making bad decisions.', rejoinder: 'Good. Mid-workout means <em>they have no time to learn</em>. Whatever you build has to already be in their head or one glance away. This is not a learning moment. It is a reference moment.' },
+            { text: 'Night before a session, overthinking what they are about to do.', rejoinder: 'Good. Night-before means <em>they have time but low confidence</em>. They are not missing information. They are missing reassurance. That changes what you build.' },
+            { text: 'First five minutes of a workout, when they have not warmed up their focus yet.', rejoinder: 'Good. First-five-minutes means <em>a priming window</em>. If you can shape their attention before the workout really starts, the rest of the session runs better on its own.' },
           ]
         },
         {
           options: [
-            { text: 'Phone in one hand, coffee in the other. Half-awake.', rejoinder: 'Good. One-handed, half-attention means <em>you cannot ask her to type</em>. No text fields, no long forms. Taps only. Short chunks. And whatever you build has to survive being closed and reopened three times before she finishes it.' },
-            { text: 'Phone on a bench, about to start lifting.', rejoinder: 'Good. Phone-on-bench means <em>glanceable</em>. She will look, look away, do the work, look back. You are designing for a person whose attention lives in three-second windows. Everything has to be a glance.' },
-            { text: 'Phone on the hotel nightstand, standing up, dressed for the gym.', rejoinder: 'Good. Standing-and-ready means <em>she is one decision away from doing the thing</em>. Your job is not to teach her. Your job is to remove the last piece of friction between her and the door.' },
+            { text: 'Phone on a bench, sweaty hands, sixty seconds between sets.', rejoinder: 'Good. Sweaty-hands-sixty-seconds means <em>one glance, big text</em>. No typing. No scrolling. Whatever you build has to be readable in a single look.' },
+            { text: 'Phone on the nightstand, lying in bed, half-distracted.', rejoinder: 'Good. In-bed-half-distracted means <em>you have attention but not commitment</em>. She will tap, but she will not work hard. Build something that meets her where she is, not where you want her to be.' },
+            { text: 'Phone on the counter next to coffee, about to head out.', rejoinder: 'Good. Coffee-and-about-to-leave means <em>you have ninety seconds, maximum</em>. Whatever you build has to fit inside a single sip. That constraint is an asset, not a problem.' },
           ]
         },
         {
           options: [
-            { text: 'Whether tomorrow is actually going to feel manageable.', rejoinder: 'Good. You named a <em>feeling decision</em>, not a fact decision. She is not missing information. She is missing confidence. What you build has to move the feeling, not dump more content on her.' },
-            { text: 'What to do first, second, and third, right now.', rejoinder: 'Good. You named <em>a sequence</em>. Three decisions, in order. That is a completely different product than a workout plan. It is a decision tree, or a three-card flow, or a single screen with three steps.' },
-            { text: 'How to modify the plan without falling off it.', rejoinder: 'Good. You named <em>an adjustment</em>. She already has a plan. She needs permission and a small tool for adapting it without starting over. That is not a course. That is a one-page flexibility framework.' },
+            { text: 'That modifying is not quitting. It is the skill.', rejoinder: 'Good. You named <em>a mindset shift</em>, not a technique. That points to a different kind of build. You are not teaching them what to do. You are teaching them what it means.' },
+            { text: 'The three signs that say stop, and the three signs that say keep going.', rejoinder: 'Good. You named <em>a decision framework</em>. Three and three. That is almost a format unto itself. A card, a screen, a small decision tree that they run themselves.' },
+            { text: 'That the first set is for warming up their attention, not their muscles.', rejoinder: 'Good. You named <em>a reframe</em>. One sentence that changes how they approach the whole workout. Small builds carry reframes better than courses do.' },
           ]
         }
-      ]
+      ],
+      recommendations: {
+        // Recommendations are generated based on when + what answers
+        // Format: answer combination keys mapped to recommendation content
+        default: {
+          format: 'A pre-workout <em>primer card</em>.',
+          description: 'A single screen your client sees right before they start. One question, one reminder, one thing to hold in mind. Sixty seconds, on their phone, no signup. It lives as a link they open before every session.',
+          why: 'Your expertise is in the judgment calls you make automatically. The moment you named is where they need that judgment most. A course would ask them to sit down and study. A primer card meets them where they already are, in the thirty seconds before the workout begins, and hands them one useful thing. That is enough.'
+        }
+      }
     },
 
     photographer: {
@@ -872,67 +866,81 @@
       questions: [
         {
           options: [
-            { text: 'A beginner heading out to shoot their first real landscape at golden hour.', rejoinder: 'Good. You picked someone at <em>a specific moment of high pressure</em>. Golden hour lasts twenty minutes. He has one shot at it. He is not going to read a 3,000-word blog post on composition in the car on the way there.' },
-            { text: 'A hobbyist about to post a photo publicly for the first time, wondering if it is any good.', rejoinder: 'Good. You picked someone in <em>a vulnerability moment</em>. This is not technical learning. This is judgment learning. She needs a framework for evaluating her own work, not more tips on how to shoot.' },
-            { text: 'A parent with a nice camera trying to capture a school event without fumbling the settings.', rejoinder: 'Good. You picked someone with <em>mismatched gear and skill</em>. He has more camera than he knows how to use. He does not need a full course. He needs three settings, memorized, that will work for ninety percent of what he is about to shoot.' },
+            { text: 'How to read light before the light changes.', rejoinder: 'You picked <em>a perception skill</em>. The hardest kind to teach with words. Which is exactly why a small, visual tool built for the moment beats a long written guide every time.' },
+            { text: 'Which camera settings to reach for in the five most common situations.', rejoinder: 'You picked <em>a reference skill</em>. Not complicated, just uncommitted to memory. Your people do not need to understand it deeply. They need to find it fast when they are standing there.' },
+            { text: 'How to tell if a photo is actually good or just technically fine.', rejoinder: 'You picked <em>a judgment skill</em>. The one that separates hobbyists from photographers. Teaching it requires showing, not telling. That points to a specific kind of build.' },
           ]
         },
         {
           options: [
-            { text: 'In the car, on the way to the location, fifteen minutes out.', rejoinder: 'Good. In-the-car means <em>podcast-brain</em>. He can listen or glance. He cannot read long form. He is thinking about what he is about to shoot. Anything you build for this moment is a pre-teach, primed to hit when he arrives.' },
-            { text: 'At home, at her desk, one photo open in Lightroom, trying to decide if it is post-worthy.', rejoinder: 'Good. At-the-desk means <em>deliberation time</em>. She has attention and focus. But she is looking at a specific image and needs a specific judgment. Generic advice will not help. She needs a checklist tuned to the moment of evaluation.' },
-            { text: 'At the school event, standing in the back, camera up.', rejoinder: 'Good. In-the-action means <em>zero time</em>. The shot is happening right now. He cannot learn in this moment, he can only execute. Anything you design has to have already been learned before he got here. This is a reference moment, not a learning moment.' },
+            { text: 'Out on a shoot, with the camera up and the moment happening.', rejoinder: 'Good. Camera-up-moment-happening means <em>no time to learn</em>. Whatever you build will not be used in the moment. It will be used before the moment, or studied before the moment becomes one.' },
+            { text: 'At the desk, editing, staring at an image and not sure about it.', rejoinder: 'Good. At-the-desk-uncertain means <em>they have focus, not confidence</em>. They need a framework, not more information. Small tools for deliberation work beautifully here.' },
+            { text: 'Packing up to go shoot, not sure what they are about to walk into.', rejoinder: 'Good. Packing-up-pre-shoot means <em>a priming window</em>. This is where pre-teaching earns its keep. Shape their attention now, and the shoot goes better on its own.' },
           ]
         },
         {
           options: [
-            { text: 'Phone propped on the dashboard, hands on the wheel.', rejoinder: 'Good. Hands-on-wheel means <em>audio first, glance second</em>. No interactions, no taps, no forms. If you build for this moment, the primary channel is his ear. The phone is backup.' },
-            { text: 'Laptop open, one image on screen, phone face-down.', rejoinder: 'Good. Laptop-open means <em>you can ask for focus</em>. She will click, scroll, and compare. You can build something richer here, like a side-by-side, a sliding comparison, or a guided critique.' },
-            { text: 'Camera up to his eye, phone in his back pocket, cannot look at it.', rejoinder: 'Good. Camera-up means <em>your learning is not in the moment</em>. Whatever you built has to be in his head or on a cheat card in his bag. The phone is not the delivery device. This is where pre-teaching matters most.' },
+            { text: 'Phone in the car, fifteen minutes from the location.', rejoinder: 'Good. In-the-car means <em>audio or a glance, nothing more</em>. Hands on the wheel. Mind halfway there already. Whatever you build has to survive being listened to or scanned once.' },
+            { text: 'Laptop open, one image on screen, coffee cooling.', rejoinder: 'Good. Laptop-open-coffee means <em>deliberation mode</em>. You can ask for more attention here. A side-by-side, a checklist, a guided critique. Richer formats work in this moment.' },
+            { text: 'Phone in hand at the trunk of the car, deciding what lens to bring.', rejoinder: 'Good. At-the-trunk-deciding means <em>a decision moment</em>. Two minutes, one choice. That is the cleanest possible design constraint. Small decisions love small tools.' },
           ]
         },
         {
           options: [
-            { text: 'What three camera settings will not embarrass him in low light.', rejoinder: 'Good. You named <em>a survival kit</em>. Not a full education. Three settings, memorized, good enough. The format writes itself: a card, a reel, a one-page reference. Not a course.' },
-            { text: 'Whether the image on her screen is actually worth posting.', rejoinder: 'Good. You named <em>a judgment call</em>. Not a technique. She needs a small framework for evaluating her own work, three or four questions she can run a photo through. That is a tool, not a lesson.' },
-            { text: 'How to read the light before the light changes.', rejoinder: 'Good. You named <em>a perception skill</em>. That is harder than a technique, because it has to be trained, not told. The format has to be practice-based. Scenarios, examples, pattern recognition. Not a written guide.' },
+            { text: 'Three questions that will tell them if the light is worth waiting for.', rejoinder: 'Good. You named <em>a small decision framework</em>. Three questions, always the same, that they can run in fifteen seconds. That is a tool, not a lesson.' },
+            { text: 'A way to describe what makes a photo good, so they can see it in their own work.', rejoinder: 'Good. You named <em>an evaluation language</em>. That is harder than it looks, because they need words they can use on themselves. Small tools that hand over vocabulary do real work.' },
+            { text: 'The one setting change that solves eighty percent of what goes wrong.', rejoinder: 'Good. You named <em>a shortcut</em>. One thing, memorizable, high-leverage. That is almost asking to be built as a card or a reel. Not a course.' },
           ]
         }
-      ]
+      ],
+      recommendations: {
+        default: {
+          format: 'A <em>pre-shoot primer</em> they open in the car.',
+          description: 'A short audio or visual piece, ninety seconds, designed to be consumed on the way to the shoot. It does not teach everything. It primes one specific skill. When they arrive, they see what you want them to see. The shoot goes better because the learning already happened.',
+          why: 'What you know is perception, and perception has to be trained before the moment, not during it. A course asks them to sit down and study weeks in advance. A primer meets them in the car, fifteen minutes out, when they are thinking about what they are about to shoot. That is when your expertise can actually land.'
+        }
+      }
     },
 
-    realtor: {
-      label: 'Realtor',
+    service: {
+      label: 'Service Business',
       questions: [
         {
           options: [
-            { text: 'A first-time buyer walking into her first showing, pretending she knows what she is looking at.', rejoinder: 'Good. You picked someone in <em>a confidence mismatch</em>. She is about to make the biggest purchase of her life and she does not want to look foolish. Your learner is not ignorant. She is exposed. That changes what you build.' },
-            { text: 'A couple about to put in their first offer, arguing about the number.', rejoinder: 'Good. You picked <em>two learners at once</em>, which is rare and hard. They need to get to agreement, not just information. Anything you build has to move the conversation between them, not just educate either one of them.' },
-            { text: 'A buyer three showings in, starting to think every house looks the same.', rejoinder: 'Good. You picked someone in <em>decision fatigue</em>. She is not learning anymore. She is losing the ability to tell the houses apart. What she needs is not more information. It is a system for sorting what she has already seen.' },
+            { text: 'How to read a customer before they tell you what they want.', rejoinder: 'You picked <em>a perception skill</em>. Something you do in the first two minutes of every interaction, without noticing. Your team, on the other hand, is flying blind. That gap is your opportunity.' },
+            { text: 'The difference between a job that is done and a job that is done right.', rejoinder: 'You picked <em>a quality standard</em>. Not obvious to the person doing the work for the first time. Obvious to you. That kind of tacit standard is exactly what goes missing when you hand off work.' },
+            { text: 'Which five mistakes cause ninety percent of the callbacks.', rejoinder: 'You picked <em>a pattern recognition skill</em>. Years of watching things go wrong have taught you what to look out for. None of it lives outside your head yet.' },
           ]
         },
         {
           options: [
-            { text: 'In the car in front of the house, three minutes before the showing.', rejoinder: 'Good. In-the-car means <em>a primer window</em>. She has ninety seconds of real attention before she walks in. This is the flipped-classroom move: teach her before the experience so she gets more out of the experience itself.' },
-            { text: 'In the kitchen that evening, laptop open, debating the offer.', rejoinder: 'Good. Kitchen-at-night means <em>two people, one decision</em>. They are going to argue. You are not designing for one learner, you are designing for a conversation. Your tool has to survive being passed back and forth across a counter.' },
-            { text: 'In the passenger seat between showing three and showing four.', rejoinder: 'Good. Between-showings means <em>memory is failing fast</em>. She cannot remember which kitchen was in which house. What she needs is not education. It is capture. A simple structure for keeping the houses apart in her head.' },
+            { text: 'On the drive to a job, when they are still not sure what they are walking into.', rejoinder: 'Good. Drive-to-the-job means <em>a priming window</em>. They have fifteen minutes of unfocused attention. If you can shape what they notice before they arrive, they perform better the moment they step out of the truck.' },
+            { text: 'Halfway through a job, when something unexpected shows up.', rejoinder: 'Good. Mid-job-unexpected-thing means <em>a decision moment</em>. They need to know what to do, or who to call, in the next ninety seconds. That is not a learning moment. It is a lookup moment.' },
+            { text: 'After a job, when they are writing it up and cannot remember a detail.', rejoinder: 'Good. After-the-job-capturing means <em>a memory moment</em>. They already did the work. Now they need structure to hand off what they saw. Small tools for capturing the right things make a real difference.' },
           ]
         },
         {
           options: [
-            { text: 'Phone in one hand, car keys in the other, about to open the door.', rejoinder: 'Good. About-to-walk-in means <em>absolute minimum friction</em>. She has maybe sixty seconds before she feels rude for standing outside. Everything has to be scannable in one look. Three things max. No more.' },
-            { text: 'Laptop between two people, coffee cups on either side.', rejoinder: 'Good. Laptop-between-two means <em>shared surface</em>. You are not designing a private learning moment. You are designing a conversation starter. The tool has to give them something to point at and disagree with.' },
-            { text: 'Phone on her lap, notes from three houses already open.', rejoinder: 'Good. Phone-on-lap-mid-tour means <em>fragmented attention</em>. She is tired. She is listening to you drive. What you build has to be almost automatic, so little friction that she uses it even when she is too tired to want to.' },
+            { text: 'Phone on the truck dashboard, half-listening, five minutes out.', rejoinder: 'Good. Truck-dashboard-five-out means <em>audio first</em>. Hands on the wheel. One eye on the road. Whatever you build has to work as something heard or glanced at, not read.' },
+            { text: 'Phone in their back pocket, hands covered in work, standing in the problem.', rejoinder: 'Good. Hands-in-the-work means <em>you cannot ask them to tap</em>. Voice commands or one-glance references only. This is the hardest moment to design for, and the highest-leverage.' },
+            { text: 'Phone on the dashboard after the job, truck still running.', rejoinder: 'Good. Truck-still-running-post-job means <em>a closing window</em>. They are done, tired, ready to go. You have sixty seconds before they drive off. Capture the right things, or lose them.' },
           ]
         },
         {
           options: [
-            { text: 'What three things to actually look at when she walks through.', rejoinder: 'Good. You named <em>a focus tool</em>. Not a house-hunting course. Three things, memorized, that will make her feel less lost. The format is a card, a reel, a pre-walk-through primer. Ninety seconds, done.' },
-            { text: 'How to tell if the offer number is reasonable, together.', rejoinder: 'Good. You named <em>a shared decision framework</em>. Not a market analysis. A small tool that lets both of them see the same information at the same time and end up in the same place. That is a worksheet, a visual, or a guided flow. Not a course.' },
-            { text: 'How to keep five houses straight in her head.', rejoinder: 'Good. You named <em>a memory aid</em>. Not learning, exactly. Structure. A three-field capture that she can fill in during each showing, so by showing five she has not lost showings one and two. Tiny tool, huge impact.' },
+            { text: 'The three things to look for before they even start the work.', rejoinder: 'Good. You named <em>a pre-work checklist</em>. Three items, always the same, done before anything else. Small tools that sit at the front of a process prevent eighty percent of what goes wrong later.' },
+            { text: 'Who to call or what to do when they hit the thing they have never seen before.', rejoinder: 'Good. You named <em>a decision tree</em>. Not a course. A short reference that answers one question: what now. That kind of small tool is the backbone of any system that survives handoff.' },
+            { text: 'The three things worth writing down so the next person can find them.', rejoinder: 'Good. You named <em>a capture tool</em>. Not complicated. Three fields, filled in at the end of every job. That is how your expertise starts to live outside your head.' },
           ]
         }
-      ]
+      ],
+      recommendations: {
+        default: {
+          format: 'A <em>pre-job primer</em> and a matching <em>post-job capture tool</em>.',
+          description: 'Two small pieces, both under two minutes. The first plays on the drive to the job: three things to look for, three common pitfalls, one question to ask the customer. The second opens on the drive home: three fields to capture what was done, what was unusual, what the next person needs to know. Both live on the phone. Both get used every time. Together, they turn what lives in your head into a system anyone on your team can carry.',
+          why: 'Your expertise is tacit. It lives in the small decisions you make without noticing. A course would try to make it explicit all at once, and it would not work. A primer at the start and a capture tool at the end meet your team in the two moments where your expertise actually matters, and slowly move what you know into something the business can hold.'
+        }
+      }
     }
   };
 
@@ -959,10 +967,8 @@
     const qNum = qIndex + 1;
     const question = industryData.questions[qIndex];
 
-    // Set industry badge
     document.getElementById('q' + qNum + '-industry').textContent = industryData.label;
 
-    // Render options
     const optionsContainer = document.getElementById('q' + qNum + '-options');
     optionsContainer.innerHTML = '';
 
@@ -974,7 +980,6 @@
       optionsContainer.appendChild(btn);
     });
 
-    // Reset rejoinder + continue
     document.getElementById('q' + qNum + '-rejoinder').classList.remove('visible');
     document.getElementById('q' + qNum + '-continue-wrap').classList.remove('visible');
   }
@@ -984,18 +989,16 @@
     const question = industryData.questions[qIndex];
     const chosen = question.options[optionIndex];
 
-    state.answers[qIndex] = { text: chosen.text, rejoinder: chosen.rejoinder };
+    state.answers[qIndex] = { text: chosen.text, rejoinder: chosen.rejoinder, index: optionIndex };
 
     const qNum = qIndex + 1;
     const optionsContainer = document.getElementById('q' + qNum + '-options');
 
-    // Mark selected, dim others
     optionsContainer.querySelectorAll('.option').forEach((btn, i) => {
       if (i === optionIndex) btn.classList.add('selected');
       else btn.classList.add('dim');
     });
 
-    // Show rejoinder
     document.getElementById('q' + qNum + '-rejoinder-text').innerHTML = chosen.rejoinder;
     setTimeout(() => {
       document.getElementById('q' + qNum + '-rejoinder').classList.add('visible');
@@ -1005,13 +1008,14 @@
     }, 400);
   }
 
-  function renderProfile() {
+  function renderRecommendation() {
     const industryData = CONTENT[state.industry];
-    document.getElementById('profile-industry-label').textContent = industryData.label;
-    document.getElementById('profile-a1').textContent = state.answers[0].text;
-    document.getElementById('profile-a2').textContent = state.answers[1].text;
-    document.getElementById('profile-a3').textContent = state.answers[2].text;
-    document.getElementById('profile-a4').textContent = state.answers[3].text;
+    const rec = industryData.recommendations.default;
+
+    document.getElementById('rec-industry-label').textContent = industryData.label;
+    document.getElementById('rec-format').innerHTML = rec.format;
+    document.getElementById('rec-description').innerHTML = rec.description;
+    document.getElementById('rec-why-text').innerHTML = rec.why;
   }
 
   function restartExperience() {
@@ -1031,9 +1035,9 @@
   document.querySelectorAll('[data-next]').forEach(btn => {
     btn.addEventListener('click', () => {
       const next = btn.dataset.next;
-      if (next === 'profile') {
-        renderProfile();
-        showScreen('profile');
+      if (next === 'recommendation') {
+        renderRecommendation();
+        showScreen('recommendation');
       } else {
         const qIndex = parseInt(next.replace('q', ''), 10) - 1;
         renderQuestion(qIndex);
